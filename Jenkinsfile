@@ -3,9 +3,27 @@ pipeline {
     agent any
 
     stages {
-        stage('GIT Checkout') {
+        stage("GIT Checkout") {
             steps {
-                git branch: 'main', url: 'https://github.com/vishalchauhan91196/javacicode.git'
+                git 'https://github.com/Aryanshrana/javacicode-CICD.git'
+            }
+        }
+
+        stage("UNIT TESTING") {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage("INTEGRATION TESTING") {
+            steps {
+                sh 'mvn verify -DskipUnitTesting'
+            }
+        }
+
+        stage("BUILD") {
+            steps {
+                sh 'mvn clean install'
             }
         }
     }
