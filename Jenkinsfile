@@ -62,7 +62,7 @@ pipeline {
                 ], 
                     credentialsId: 'nexus', 
                     groupId: 'com.example', 
-                    nexusUrl: '54.65.249.137:8081', 
+                    nexusUrl: '13.127.219.52:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'Java-released', 
