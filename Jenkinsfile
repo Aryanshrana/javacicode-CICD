@@ -26,5 +26,24 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
+
+        stage('STATIC CODE ANALYSIS') {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'sonarqubeToken') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
+            }
+        }
+
+        stage('QUALITY GATE STATUS') {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarqubeToken'
+                }
+            }
+        }
+
     }
 }
